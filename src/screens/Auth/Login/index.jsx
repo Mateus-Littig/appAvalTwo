@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity, Image } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as yup from 'yup';
 import * as Styled from './styles';
 import { Button } from '../../../components/Button';
@@ -13,27 +14,49 @@ import api from '../../../services/api';
 export function Login() {
   const navigation = useNavigation();
 
+  useEffect(() => {
+    handleToken();
+  }, []);
+
+  async function handleToken() {
+    const loadToken = await AsyncStorage.getItem('Token');
+    if (loadToken) {
+      navigation.navigate('TabRoutes');
+    } else {
+      navigation.navigate('Login');
+    }
+  }
+
   const schema = yup.object({
-    identifier: yup.string().email('* Email inválido').required('* Informe seu email'),
+    identifier: yup.string().min(6, '* Seu nome deve conter pelo menos 6 digitos').required('* Informe seu nome completo'),
     password: yup.string().min(6, '* A senha deve conter pelo menos 6 digitos').required('* Informe sua senha'),
   });
 
-  const { control, handleSubmit, formState: { errors } } = useForm({
+  const { control, handleSubmit, formState: { errors } } = useForm(
+    {
     defaultValues: {
       identifier: '',
       password: '',
     },
     resolver: yupResolver(schema),
   });
+
   async function onSubmit(input) {
-    try {
+   try {
       obj = {
-        identifier: input.email,
+        identifier: input.identifier,
         password: input.password,
       };
       const response = await api.post('/auth/local', obj);
-      // navigation.navigate('TabRoutes');
+      console.log('ola', response.data.user.id);
+      const token = response.data.jwt;
+      const ID = JSON.stringify(response.data.user.id);
+      console.log(obj);
+      await AsyncStorage.setItem('ID', ID);
+      await AsyncStorage.setItem('Token', token);
+      navigation.navigate('TabRoutes');
     } catch (error) {
+      console.log(error);
     }
   }
 
@@ -45,12 +68,14 @@ export function Login() {
     <Styled.Container>
       <Header title="Login" />
 
+      {/* <ActivityIndicator size="large" color="#2e39d4" /> */}
+
       <Styled.ViewInput>
 
         <Input
-          title="Email"
+          title="Username"
           name="identifier"
-          placeholder="mateus@email.com"
+          placeholder="Your username"
           control={control}
           errors={errors}
         />

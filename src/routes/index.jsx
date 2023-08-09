@@ -6,6 +6,7 @@ import { Login } from '../screens/Auth/Login';
 import { DetailProduct } from '../screens/App/DetailProduct';
 import { CategoryRender } from '../screens/App/CategoryRender';
 import { TabRoutes } from './tab.routes';
+import { AllProducts } from '../screens/App/AllProducts';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ export function StackRoutes() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="DetailProduct" component={DetailProduct} />
         <Stack.Screen name="CategoryRender" component={CategoryRender} />
+        <Stack.Screen name="AllProducts" component={AllProducts} />
         <Stack.Screen name="TabRoutes" component={TabRoutes} />
       </Stack.Navigator>
     </NavigationContainer>

@@ -50,6 +50,7 @@ export default function Bag() {
     setCartItems(upCartItems)
     await AsyncStorage.setItem('cartItems', JSON.stringify(upCartItems));
   };
+
   const handleLess = async (index) => {
     const upCartItems = [...cartItems];
     if (upCartItems[index].quantity > 1) {

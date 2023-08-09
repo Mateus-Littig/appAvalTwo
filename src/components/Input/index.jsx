@@ -7,9 +7,6 @@ export function Input({
   name, onSubmit
 }) {
 
-  // const [inputValue, setInputValue] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
   return (
     <Styled.Container>
 
@@ -19,7 +16,7 @@ export function Input({
         <Controller
           name={name}
           control={control}
-          render={({ field: { onChange, onBlur, value } }) => (
+          render={({ field: { onChange, onBlur, value }, fieldState: { isDirty } }) => (
             <Styled.InputText
               placeholder={placeholder}
               placeholderTextColor="#828282"
@@ -29,11 +26,13 @@ export function Input({
               onSubmit={onSubmit}
               onBlur={onBlur} // É chamado quando o TextInput é tocado.
               value={value}
-              style={{ borderColor: isSubmitted && errors[name] ? 'green' : '#828282', borderWidth: 2 }}
+              style={{
+                borderColor: errors[name] ? '#FF0000' : isDirty ? '#00FF00' : '#828282', borderWidth: 1
+              }}
             />
           )}
         />
-      {isSubmitted && errors[name] && <Styled.LabelError>{errors[name].message}</Styled.LabelError>}
+      {errors[name] && <Styled.LabelError>{errors[name].message}</Styled.LabelError>}
       </Styled.ViewInput>
     </Styled.Container>
   );

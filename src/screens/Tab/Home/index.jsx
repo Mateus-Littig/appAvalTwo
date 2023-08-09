@@ -6,10 +6,12 @@ import {
   StatusBar, 
   SafeAreaView 
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import * as Styled from './styles';
 import { CardProduct } from '../../../components/CardProduct';
 
 export default function Home() {
+  const navigation = useNavigation();
 
   return (
     <SafeAreaView>
@@ -28,7 +30,7 @@ export default function Home() {
               <Styled.Sale>Sale</Styled.Sale>
               <Styled.Sub>Super summer sale</Styled.Sub>
             </Styled.ViewSale>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('AllProducts')}>
               <Styled.ViewAll>View all</Styled.ViewAll>
             </TouchableOpacity>
           </Styled.Body>
@@ -40,7 +42,7 @@ export default function Home() {
               <Styled.Sale>New</Styled.Sale>
               <Styled.Sub>You've never seen it before!</Styled.Sub>
             </Styled.ViewSale>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('AllProducts')}>
               <Styled.ViewAll>View all</Styled.ViewAll>
             </TouchableOpacity>
           </Styled.Body>

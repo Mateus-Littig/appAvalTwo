@@ -1,23 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { SafeAreaView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Styled from './styles';
 import { HeaderButton } from '../../../components/HeaderButton'
 import { Title } from '../../../components/Title'
 import { ButtonUser } from '../../../components/ButtonUser'
 import { Button } from '../../../components/Button';
-import api from '../../../services/api';
 
 export default function Profile() {
-  const [profile, setProfile] = useState([])
+  const navigation = useNavigation();
 
-  async function getProfile() {
-    const response = await api.get('/users/?populate=*');
-    setProfile(response.data);
-  }
-
-  useEffect(() => {
-    getProfile();
-  }, []);
+  const handleLogout = async () => {
+    try {
+      await AsyncStorage.removeItem('Token');
+      console.log('Logout realizado com sucesso.');
+      navigation.navigate('Login');
+    } catch (error) {
+      console.error('Erro ao realizar logout:', error);
+    }
+  };
 
   return (
     <SafeAreaView>
@@ -35,8 +37,8 @@ export default function Profile() {
         <Styled.ContentUser>
           <Styled.Avatar source={{ uri: 'https://github.com/Mateus-littig.png' }} />
           <Styled.ViewUser>
-            {/* <Styled.User>{profile[0].username}</Styled.User> */}
-            {/* <Styled.Email>{profile[0].email}</Styled.Email> */}
+            <Styled.User>Mateus Littig</Styled.User>
+            <Styled.Email>mateus.littig@gmail.com</Styled.Email>
           </Styled.ViewUser>
         </Styled.ContentUser>
 
@@ -65,6 +67,7 @@ export default function Profile() {
           name="Log Out"
           Bck="#DB3022"
           Color="#FFF"
+          onPress={handleLogout}
         />
 
       </Styled.Container>

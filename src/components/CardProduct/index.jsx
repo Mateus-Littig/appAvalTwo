@@ -23,7 +23,7 @@ export function CardProduct() {
 
   async function loadMoreProducts() {
     setLoading(true);
-    const moreResponse = await api.get(`/produtos/?populate=*&skip=${productsToShow}`);
+    const moreResponse = await api.get(`/produtos/?populate=*${productsToShow}`);
     const moreProducts = moreResponse.data.data;
     setProdutos((prevProducts) => [...prevProducts, ...moreProducts]);
     setProductsToShow((prevProductsToShow) => prevProductsToShow + productsPerLoad);
@@ -48,7 +48,7 @@ export function CardProduct() {
         renderItem={({ item }) => (
           <Styled.Card>
             <TouchableOpacity onPress={() => handleGoDetail(item.id)}>
-              <Styled.Image source={{ uri: `http://192.168.1.38:1337${item.attributes.image.data[0].attributes.url}` }} />
+              <Styled.Image source={{ uri: `http://192.168.1.38:1337${item.attributes.image?.data[0].attributes.url}` }} />
             </TouchableOpacity>
             <Styled.ViewSale>
               <Styled.Percent>-20%</Styled.Percent>

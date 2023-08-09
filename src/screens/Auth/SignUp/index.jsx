@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity, Image} from 'react-native';
 import { useForm } from 'react-hook-form';
@@ -11,6 +11,7 @@ import { Input } from '../../../components/Input';
 import api from '../../../services/api';
 
 export function SignUp() {
+  const navigation = useNavigation();
 
   const schema = yup.object({
     username: yup.string().min(6, '* Seu nome deve conter pelo menos 6 digitos').required('* Informe seu nome completo'),
@@ -35,11 +36,10 @@ export function SignUp() {
       password: input.password,
     };
       const response = await api.post('/auth/local/register', obj);
-      // navigation.navigate('Login');
+      navigation.navigate('Login');
     } catch (error) {
     }
   };
-  const navigation = useNavigation();
 
   const handleLogin = () => {
     navigation.navigate('Login');
@@ -53,7 +53,7 @@ export function SignUp() {
         <Input
           title="Name"
           name="username"
-          placeholder="Mateus Littig"
+          placeholder="Your username"
           control={control}
           errors={errors}
         />
