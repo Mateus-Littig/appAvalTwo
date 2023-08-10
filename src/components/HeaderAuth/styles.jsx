@@ -13,5 +13,4 @@ export const Title = styled.Text`
   font-weight: 600;
   margin-top: 55px;
   color: ${({ theme }) => theme.COLORS.Black};
-;
 `;

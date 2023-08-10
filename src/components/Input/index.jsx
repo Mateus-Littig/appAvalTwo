@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Controller } from 'react-hook-form';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import * as Styled from './styles';
 
 export function Input({
   title, placeholder, inputRef, control, errors, 
-  name, onSubmit
+  name, onSubmit, RightIcon, iconSize
 }) {
+  const [secury, setSecury] = useState(false);
 
   return (
     <Styled.Container>
@@ -20,11 +22,12 @@ export function Input({
             <Styled.InputText
               placeholder={placeholder}
               placeholderTextColor="#828282"
+              secureTextEntry={secury}
               onChangeText={onChange}
               ref={inputRef}
               placeholderStyle={{ marginLeft: 15 }}
               onSubmit={onSubmit}
-              onBlur={onBlur} // É chamado quando o TextInput é tocado.
+              onBlur={onBlur}
               value={value}
               style={{
                 borderColor: errors[name] ? '#FF0000' : isDirty ? '#00FF00' : '#828282', borderWidth: 1
@@ -32,8 +35,18 @@ export function Input({
             />
           )}
         />
-      {errors[name] && <Styled.LabelError>{errors[name].message}</Styled.LabelError>}
+        {RightIcon && (
+          <Styled.Button onPress={() => setSecury(!secury)}>
+            <Ionicons
+              name={secury ? 'eye-off' : 'eye'}
+              size={iconSize}
+              color="#2D2D2D"
+              style={{ padding: 5, right: 8 }}
+            />
+          </Styled.Button>
+        )}
       </Styled.ViewInput>
+      {errors[name] && <Styled.LabelError>{errors[name].message}</Styled.LabelError>}
     </Styled.Container>
   );
 }

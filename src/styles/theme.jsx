@@ -9,6 +9,7 @@ export const Theme = {
       Success: '#2FDB5F',
       Warning: '#F1C75D',
       RedPrimary: '#DB3022',
+      Blue: '#3838e7',
 
     },
   };

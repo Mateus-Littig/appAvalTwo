@@ -13,7 +13,6 @@ export const Content = styled.View`
   width: 90%;
   margin: auto;
 `;
-
 export const Title = styled.Text`
   font-size: 20px;
   font-weight: 600;

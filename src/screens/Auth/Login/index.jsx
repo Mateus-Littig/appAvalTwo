@@ -84,6 +84,8 @@ export function Login() {
           title="Password"
           name="password"
           placeholder="Password"
+          RightIcon
+          iconSize={24}
           control={control}
           errors={errors}
         />

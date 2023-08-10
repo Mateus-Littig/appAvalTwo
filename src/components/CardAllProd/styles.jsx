@@ -1,8 +1,7 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  flex-direction: row;
-  margin-bottom: 20px;
+  margin-top: 25px;
 `;
 export const Card = styled.View`
   width: 150px;
@@ -18,22 +17,6 @@ export const Image = styled.Image`
   height: 157px;
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
-`;
-export const ViewSale = styled.View`
-  width: 40px;
-  height: 24px;
-  margin-left: 10px;
-  position: absolute;
-  margin-top: 8px;
-  border-radius: 30px;
-  align-items: center;
-  justify-content: center;
-  background-color: ${({ theme }) => theme.COLORS.RedPrimary};
-`;
-export const Percent = styled.Text`
-  font-size: 12px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.COLORS.White};
 `;
 export const Icon = styled.Image`
   margin-top: 5px;

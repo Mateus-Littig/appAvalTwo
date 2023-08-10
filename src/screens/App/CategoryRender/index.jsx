@@ -51,6 +51,7 @@ export function CategoryRender() {
     <SafeAreaView>
 
       <Styled.Container>
+
         <HeaderButton
           LeftIcon
           iconName="chevron-left"
@@ -77,7 +78,7 @@ export function CategoryRender() {
         <>
           <FlatList
             data={produtos}
-            keyExtractor={(item) => item.id} // ao passar o index, estou criando uma chave exclusiva para cada produto.
+            keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <Styled.Card>
                 <Styled.ViewImg>

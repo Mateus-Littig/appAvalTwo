@@ -26,6 +26,14 @@ export const TextCateg = styled.Text`
   font-size: 16px;
   color: ${({ theme }) => theme.COLORS.White};
 `;
+export const Text = styled.Text`
+  width: 82%;
+  margin: auto;
+  font-size: 24px;
+  margin-top: 20px;
+  font-weight: bold;
+  color: ${({ theme }) => theme.COLORS.Black};
+`;
 export const Card = styled.View`
   width: 90%;
   height: 104px;
@@ -77,12 +85,4 @@ export const ViewHeart = styled.View`
   top: 80px;
   justify-content: center;
   background-color: ${({ theme }) => theme.COLORS.Light};
-`;
-export const Text = styled.Text`
-  width: 82%;
-  margin: auto;
-  font-size: 24px;
-  margin-top: 20px;
-  font-weight: bold;
-  color: ${({ theme }) => theme.COLORS.Black};
 `;
