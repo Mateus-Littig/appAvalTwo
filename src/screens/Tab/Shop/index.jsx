@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView } from 'react-native';
-import { FlatList } from 'react-native';
+import { SafeAreaView, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import * as Styled from './styles';
 import { HeaderButton } from '../../../components/HeaderButton';

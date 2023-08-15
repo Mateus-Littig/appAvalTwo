@@ -22,13 +22,13 @@ export function CardProduct() {
   }
 
   async function loadMoreProducts() {
-    setLoading(true);
-    const moreResponse = await api.get(`/produtos/?populate=*${productsToShow}`);
-    const moreProducts = moreResponse.data.data;
-    setProdutos((prevProducts) => [...prevProducts, ...moreProducts]);
-    setProductsToShow((prevProductsToShow) => prevProductsToShow + productsPerLoad);
-    setLoading(false);
-  }
+  setLoading(true);
+  const moreResponse = await api.get(`/produtos/?populate=*&_start=${productsToShow}&_limit=${productsPerLoad}`);
+  const moreProducts = moreResponse.data.data;
+  setProdutos((prevProducts) => [...prevProducts, ...moreProducts]);
+  setProductsToShow((prevProductsToShow) => prevProductsToShow + productsPerLoad);
+  setLoading(false);
+}
 
   useEffect(() => {
     getProduto();

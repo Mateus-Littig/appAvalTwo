@@ -59,7 +59,8 @@ export function DetailProduct() {
       if (existingItemIndex !== -1) {
         // Se o produto já existir, atualize a quantidade e o valor
         existingItems[existingItemIndex].quantity += qtdProd;
-        existingItems[existingItemIndex].totalValue = (parseFloat(existingItems[existingItemIndex].totalValue) + parseFloat(formattedResult)).toFixed(2);
+        existingItems[existingItemIndex].totalValue = (parseFloat(existingItems[existingItemIndex].totalValue) 
+        + parseFloat(formattedResult)).toFixed(2);
       } else {
         // Se o produto não existir, adicione como um novo item
         const newItem = {
