@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { TouchableOpacity, Image} from 'react-native';
+import { TouchableOpacity, Image } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -30,16 +30,16 @@ export function SignUp() {
 
   async function onSubmit(input) {
     try {
-    obj = {
-      username: input.username,
-      email: input.email,
-      password: input.password,
-    };
+      obj = {
+        username: input.username,
+        email: input.email,
+        password: input.password,
+      };
       const response = await api.post('/auth/local/register', obj);
       navigation.navigate('Login');
     } catch (error) {
     }
-  };
+  }
 
   const handleLogin = () => {
     navigation.navigate('Login');
@@ -81,7 +81,7 @@ export function SignUp() {
       <Styled.Footer>
         <Styled.TextFooter>Already have an account?</Styled.TextFooter>
         <TouchableOpacity onPress={handleLogin}>
-          <Image source={require('../../../assets/Icons/arrowRight.png')}/>
+          <Image source={require('../../../assets/Icons/arrowRight.png')} />
         </TouchableOpacity>
       </Styled.Footer>
 

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView, TouchableOpacity, FlatList } from 'react-native';
-import * as Styled from './styles';
-import Ionicons from 'react-native-vector-icons/Ionicons'
-import { Title } from '../../../components/Title'
 import { useRoute, useNavigation } from '@react-navigation/native';
-import api from '../../../services/api';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Title } from '../../../components/Title';
 import { HeaderButton } from '../../../components/HeaderButton';
+import api from '../../../services/api';
+import * as Styled from './styles';
 
 export function CategoryRender() {
   const route = useRoute();
@@ -25,7 +25,7 @@ export function CategoryRender() {
       getProdutos();
     }
   }, [categ]);
-  
+
   async function getCategId() {
     try {
       const response = await api.get(`/categorias/${route?.params?.id}/?populate=*`);
@@ -40,7 +40,7 @@ export function CategoryRender() {
       const response = await api.get(`/produtos/?populate=*&filters[categoria][name][$contains]=${categ?.attributes?.name}`);
       setProdutos(response.data.data);
       if (response.data.data.length > 0) {
-        setValid(false)
+        setValid(false);
       }
     } catch (error) {
       console.log('Erro ao obter os produtos:', error);
@@ -64,18 +64,15 @@ export function CategoryRender() {
         <Styled.ViewTitle>
           <Title name={categ.attributes?.name} />
         </Styled.ViewTitle>
-        
+
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Styled.ViewCateg>
             <Styled.TextCateg>{categ.attributes?.name}</Styled.TextCateg>
           </Styled.ViewCateg>
         </TouchableOpacity>
-      {valid ? (
-        <>
+        {valid ? (
           <Styled.Text>Não existe produtos para esta categoria!</Styled.Text>
-        </>
         ) : (
-        <>
           <FlatList
             data={produtos}
             keyExtractor={(item) => item.id}
@@ -97,8 +94,8 @@ export function CategoryRender() {
                 </Styled.ViewText>
                 <TouchableOpacity>
                   <Styled.ViewHeart>
-                    <Ionicons 
-                      name='heart-outline'
+                    <Ionicons
+                      name="heart-outline"
                       size={20}
                     />
                   </Styled.ViewHeart>
@@ -106,8 +103,7 @@ export function CategoryRender() {
               </Styled.Card>
             )}
           />
-        </>
-      )}
+        )}
       </Styled.Container>
     </SafeAreaView>
   );

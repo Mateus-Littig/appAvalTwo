@@ -4,8 +4,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import * as Styled from './styles';
 
 export function Input({
-  title, placeholder, inputRef, control, errors, 
-  name, onSubmit, RightIcon, iconSize
+  title, placeholder, inputRef, control, errors,
+  name, onSubmit, RightIcon, iconSize,
 }) {
   const [secury, setSecury] = useState(false);
 
@@ -18,7 +18,7 @@ export function Input({
         <Controller
           name={name}
           control={control}
-          render={({ field: { onChange, onBlur, value }, fieldState: { isDirty } }) => (
+          render={({ field: { onChange, onBlur, value } }) => (
             <Styled.InputText
               placeholder={placeholder}
               placeholderTextColor="#828282"
@@ -30,7 +30,8 @@ export function Input({
               onBlur={onBlur}
               value={value}
               style={{
-                borderColor: errors[name] ? '#FF0000' : isDirty ? '#00FF00' : '#828282', borderWidth: 1
+                borderColor: value ? (errors[name] ? 'red' : 'green') : 'black',
+                borderWidth: 1,
               }}
             />
           )}

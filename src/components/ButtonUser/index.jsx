@@ -3,7 +3,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import * as Styled from './styles';
 
 export function ButtonUser({
-  title, subTitle
+  title, subTitle,
 }) {
   return (
     <Styled.Container>

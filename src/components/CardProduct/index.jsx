@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Ionicons from 'react-native-vector-icons/Ionicons'
-import * as Styled from './styles';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import api from '../../services/api';
+import * as Styled from './styles';
 
 export function CardProduct() {
   const navigation = useNavigation();
@@ -17,18 +17,24 @@ export function CardProduct() {
   }
 
   async function getProduto() {
-    const response = await api.get('/produtos/?populate=*');
+    const response = await api.get('/produtos/?populate=*&articles?pagination[page]=1&pagination[pageSize]=30');
     setProdutos(response.data.data);
   }
 
   async function loadMoreProducts() {
-  setLoading(true);
-  const moreResponse = await api.get(`/produtos/?populate=*&_start=${productsToShow}&_limit=${productsPerLoad}`);
-  const moreProducts = moreResponse.data.data;
-  setProdutos((prevProducts) => [...prevProducts, ...moreProducts]);
-  setProductsToShow((prevProductsToShow) => prevProductsToShow + productsPerLoad);
-  setLoading(false);
-}
+    setLoading(true);
+    const moreResponse = await api.get('/produtos/?populate=*&articles?pagination[page]=1&pagination[pageSize]=30');
+    const moreProducts = moreResponse.data.data;
+
+    const newProducts = moreProducts.map((product, index) => ({
+      ...product,
+      id: `${product.id}_${index}`, // Criei uma chave única com base no ID do produto e no índice
+    }));
+
+    setProdutos((prevProducts) => [...prevProducts, ...newProducts]);
+    setProductsToShow((prevProductsToShow) => prevProductsToShow + productsPerLoad);
+    setLoading(false);
+  }
 
   useEffect(() => {
     getProduto();
@@ -40,7 +46,7 @@ export function CardProduct() {
         horizontal
         showsHorizontalScrollIndicator={false}
         data={produtos.slice(0, productsToShow)}
-        keyExtractor={(item, index) => item.id + index} // ao passar o index, estou criando uma chave exclusiva para cada produto.
+        keyExtractor={(item) => item.id.toString()} // ao passar o index, estou criando uma chave exclusiva para cada produto.
         onEndReached={loadMoreProducts}
         onEndReachedThreshold={0.1} // quando chega no final da flatlist a função loadMore é chamada
         // atualiza o estado do loading e exibe o activityIndicator, buscando mais 10 produtos na API
@@ -56,8 +62,8 @@ export function CardProduct() {
             <Styled.Icon source={require('../../assets/stars.png')} />
             <TouchableOpacity>
               <Styled.ViewHeart>
-                <Ionicons 
-                  name='heart-outline'
+                <Ionicons
+                  name="heart-outline"
                   size={20}
                 />
               </Styled.ViewHeart>
@@ -76,7 +82,7 @@ export function CardProduct() {
           </Styled.Card>
         )}
       />
-      {loading && <ActivityIndicator size="large" color="#3838e7"/>}
+      {loading && <ActivityIndicator size="large" color="#3838e7" />}
     </Styled.Container>
   );
 }

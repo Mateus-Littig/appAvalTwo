@@ -18,8 +18,8 @@ export default function Shop() {
   async function getCategoria() {
     try {
       const response = await api.get('/categorias/?populate=*');
-      const category = response.data.data;
-      setCategory(category);
+      const categ = response.data.data;
+      setCategory(categ);
       // console.log(response.data.data);
     } catch (error) {
       console.log(error);
@@ -48,6 +48,7 @@ export default function Shop() {
             name="VIEW ALL ITEMS"
             Bck="#DB3022"
             Color="#FFF"
+            onPress={() => navigation.navigate('AllProducts')}
           />
         </Styled.ViewButton>
 

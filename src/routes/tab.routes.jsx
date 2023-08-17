@@ -82,7 +82,7 @@ export function TabRoutes() {
         options={{
           tabBarIcon: ({ focused }) => (
             <View>
-             { focused ? (
+              { focused ? (
                 <Ionicons
                   name="bag"
                   size={32}

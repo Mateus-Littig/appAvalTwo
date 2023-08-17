@@ -7,7 +7,7 @@ import * as Styled from './styles';
 
 export function HeaderButton({
   LeftIcon, iconName, iconSize, name, onPress, RightIcon,
-  iconNameR, iconSizeR
+  iconNameR, iconSizeR,
 }) {
   const navigation = useNavigation();
 

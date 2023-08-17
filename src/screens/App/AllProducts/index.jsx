@@ -5,13 +5,12 @@ import { CardAllProd } from '../../../components/CardAllProd';
 import * as Styled from './styles';
 
 export function AllProducts() {
-  
   return (
-    
+
     <SafeAreaView>
       <Styled.Container>
 
-        <HeaderButton 
+        <HeaderButton
           name="All Products"
           LeftIcon
           iconName="chevron-left"

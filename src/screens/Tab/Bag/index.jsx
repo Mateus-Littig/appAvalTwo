@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TouchableOpacity, ScrollView } from 'react-native';
-import Feather from 'react-native-vector-icons/Feather'
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
-import * as Styled from './styles';
+import Feather from 'react-native-vector-icons/Feather';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Title } from '../../../components/Title';
 import { HeaderButton } from '../../../components/HeaderButton';
 import { Button } from '../../../components/Button';
+import * as Styled from './styles';
 
 export default function Bag() {
   const [cartItems, setCartItems] = useState([]);
@@ -15,7 +15,7 @@ export default function Bag() {
   useFocusEffect(
     React.useCallback(() => {
       fetchCartItems();
-    }, [])
+    }, []),
   );
 
   async function fetchCartItems() {
@@ -26,7 +26,7 @@ export default function Bag() {
       }
       console.log(response);
     } catch (error) {
-      console.log('Erro ao buscar itens do carrinho', error)
+      console.log('Erro ao buscar itens do carrinho', error);
     }
   }
 
@@ -47,7 +47,7 @@ export default function Bag() {
     const upCartItems = [...cartItems];
     upCartItems[index].quantity += 1;
     upCartItems[index].totalValue = (upCartItems[index].quantity * upCartItems[index].value).toFixed(2);
-    setCartItems(upCartItems)
+    setCartItems(upCartItems);
     await AsyncStorage.setItem('cartItems', JSON.stringify(upCartItems));
   };
 
@@ -63,15 +63,14 @@ export default function Bag() {
 
   const totalAmount = cartItems.reduce((acc, item) => acc + parseFloat(item.totalValue), 0).toFixed(2);
 
-
   return (
     <Styled.Container>
-      <HeaderButton 
+      <HeaderButton
         RightIcon
         iconNameR="search"
         iconSizeR={26}
       />
-      <Title name="My Bag"/>
+      <Title name="My Bag" />
 
       <ScrollView>
         {cartItems.map((item, index) => (
@@ -90,19 +89,19 @@ export default function Bag() {
                     <TouchableOpacity onPress={() => handleLess(index)}>
                       <Styled.ViewIcon>
                         <Feather
-                          name='minus'
+                          name="minus"
                           size={24}
-                          color={'#A3A3A3'}
+                          color="#A3A3A3"
                         />
                       </Styled.ViewIcon>
                     </TouchableOpacity>
                     <Styled.Qtd>{item.quantity}</Styled.Qtd>
                     <TouchableOpacity onPress={() => handleMore(index)}>
                       <Styled.ViewIcon>
-                        <Feather 
-                          name='plus'
+                        <Feather
+                          name="plus"
                           size={24}
-                          color={'#A3A3A3'}
+                          color="#A3A3A3"
                         />
                       </Styled.ViewIcon>
                     </TouchableOpacity>
@@ -114,9 +113,9 @@ export default function Bag() {
             <TouchableOpacity onPress={() => handleRemoveItem(index)}>
               <Styled.Icon>
                 <Feather
-                  name='trash-2'
+                  name="trash-2"
                   size={24}
-                  color={'#FF4D4F'}
+                  color="#FF4D4F"
                 />
               </Styled.Icon>
             </TouchableOpacity>
@@ -128,32 +127,40 @@ export default function Bag() {
           </Styled.Card>
         ))}
       </ScrollView>
-        
-      <Styled.ViewInput>
-        <Styled.Input
-          placeholder="Enter your promo code"
-        />
-        <Styled.ContentIcon>
-          <MaterialIcons
-            name='arrow-circle-right'
-            size={42}
-            color={'#222222'}
-          />
-        </Styled.ContentIcon>
-      </Styled.ViewInput>
 
-      <Styled.ViewAmount>
-        <Styled.Total>Total amount:</Styled.Total>
-        <Styled.Amount>R$ {totalAmount}</Styled.Amount>
-      </Styled.ViewAmount>
-      
-      <Styled.Footer>
-        <Button
-          name="CHECK OUT"
-          Bck="#DB3022"
-          Color="#FFF"
-        />
-      </Styled.Footer>
+      <Styled.ViewFooter>
+
+        <Styled.ViewInput>
+          <Styled.Input
+            placeholder="Enter your promo code"
+          />
+          <Styled.ContentIcon>
+            <MaterialIcons
+              name="arrow-circle-right"
+              size={42}
+              color="#222222"
+            />
+          </Styled.ContentIcon>
+        </Styled.ViewInput>
+
+        <Styled.ViewAmount>
+          <Styled.Total>Total amount:</Styled.Total>
+          <Styled.Amount>
+            R$
+            {' '}
+            {totalAmount}
+          </Styled.Amount>
+        </Styled.ViewAmount>
+
+        <Styled.Footer>
+          <Button
+            name="CHECK OUT"
+            Bck="#DB3022"
+            Color="#FFF"
+          />
+        </Styled.Footer>
+
+      </Styled.ViewFooter>
 
     </Styled.Container>
   );

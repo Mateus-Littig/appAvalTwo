@@ -1,14 +1,13 @@
 import React from 'react';
-import { 
-  ScrollView, 
-  FlatList, 
-  TouchableOpacity, 
-  StatusBar, 
-  SafeAreaView 
+import {
+  ScrollView,
+  TouchableOpacity,
+  StatusBar,
+  SafeAreaView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import * as Styled from './styles';
 import { CardProduct } from '../../../components/CardProduct';
+import * as Styled from './styles';
 
 export default function Home() {
   const navigation = useNavigation();
@@ -16,11 +15,11 @@ export default function Home() {
   return (
     <SafeAreaView>
       <Styled.Container>
-        <StatusBar 
+        <StatusBar
           translucent
           backgroundColor="transparent"
         />
-        <Styled.Banner source={require('../../../assets/bannerHome.png')}/>
+        <Styled.Banner source={require('../../../assets/bannerHome.png')} />
         <Styled.HeaderText>Street clothes</Styled.HeaderText>
 
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -50,7 +49,7 @@ export default function Home() {
           <CardProduct />
 
         </ScrollView>
-        
+
       </Styled.Container>
     </SafeAreaView>
   );

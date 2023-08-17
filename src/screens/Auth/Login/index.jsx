@@ -5,11 +5,11 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as yup from 'yup';
-import * as Styled from './styles';
 import { Button } from '../../../components/Button';
 import { Header } from '../../../components/HeaderAuth';
 import { Input } from '../../../components/Input';
 import api from '../../../services/api';
+import * as Styled from './styles';
 
 export function Login() {
   const navigation = useNavigation();
@@ -34,15 +34,16 @@ export function Login() {
 
   const { control, handleSubmit, formState: { errors } } = useForm(
     {
-    defaultValues: {
-      identifier: '',
-      password: '',
+      defaultValues: {
+        identifier: '',
+        password: '',
+      },
+      resolver: yupResolver(schema),
     },
-    resolver: yupResolver(schema),
-  });
+  );
 
   async function onSubmit(input) {
-   try {
+    try {
       obj = {
         identifier: input.identifier,
         password: input.password,
@@ -95,7 +96,7 @@ export function Login() {
       <Styled.Footer>
         <Styled.TextFooter>Forgot your password?</Styled.TextFooter>
         <TouchableOpacity onPress={handleSignUp}>
-          <Image source={require('../../../assets/Icons/arrowRight.png')}/>
+          <Image source={require('../../../assets/Icons/arrowRight.png')} />
         </TouchableOpacity>
       </Styled.Footer>
 

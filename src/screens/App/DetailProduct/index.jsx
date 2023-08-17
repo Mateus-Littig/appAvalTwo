@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useRoute, useNavigation  } from '@react-navigation/native';
-import Feather from 'react-native-vector-icons/Feather'
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import { useRoute, useNavigation } from '@react-navigation/native';
+import Feather from 'react-native-vector-icons/Feather';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import Carousel from 'react-native-snap-carousel';
-import * as Styled from './styles';
-import { HeaderButton } from '../../../components/HeaderButton'
+import { HeaderButton } from '../../../components/HeaderButton';
 import { Button } from '../../../components/Button';
 import api from '../../../services/api';
+import * as Styled from './styles';
 
 export function DetailProduct() {
   const navigation = useNavigation();
@@ -29,7 +29,7 @@ export function DetailProduct() {
       setProduct(response?.data.data.attributes);
       setPrice(response?.data.data.attributes.sale);
       setCateg(response?.data.data.attributes.categoria?.data.attributes.name);
-      const images = response?.data.data.attributes.image?.data.map(item => item.attributes.url);
+      const images = response?.data.data.attributes.image?.data.map((item) => item.attributes.url);
       setImageUrls(images);
       // console.log(response.data.data.attributes.categoria?.data.attributes.name);
     } catch (error) {
@@ -54,12 +54,12 @@ export function DetailProduct() {
       // Obter dados já existentes no AsyncStorage (se houver)
       const cartItems = await AsyncStorage.getItem('cartItems');
       const existingItems = cartItems ? JSON.parse(cartItems) : [];
-      const existingItemIndex = existingItems.findIndex(item => item.product === product.name);
+      const existingItemIndex = existingItems.findIndex((item) => item.product === product.name);
       // Adicionar o novo item ao array existente
       if (existingItemIndex !== -1) {
         // Se o produto já existir, atualize a quantidade e o valor
         existingItems[existingItemIndex].quantity += qtdProd;
-        existingItems[existingItemIndex].totalValue = (parseFloat(existingItems[existingItemIndex].totalValue) 
+        existingItems[existingItemIndex].totalValue = (parseFloat(existingItems[existingItemIndex].totalValue)
         + parseFloat(formattedResult)).toFixed(2);
       } else {
         // Se o produto não existir, adicione como um novo item
@@ -87,11 +87,8 @@ export function DetailProduct() {
       <Styled.ContentHeader>
         <Styled.Img source={{ uri: `http://192.168.1.38:1337${item?.item}` }} />
       </Styled.ContentHeader>
-    )
+    );
   }
- 
-
-  
 
   return (
     <SafeAreaView>
@@ -107,7 +104,7 @@ export function DetailProduct() {
           iconSizeR={26}
         />
 
-        <Carousel 
+        <Carousel
           data={imageUrls}
           sliderWidth={350}
           itemWidth={270}
@@ -120,27 +117,27 @@ export function DetailProduct() {
               <TouchableOpacity onPress={handleLess}>
                 <Styled.ViewIcon>
                   <Feather
-                    name='minus'
+                    name="minus"
                     size={24}
-                    color={'#A3A3A3'}
+                    color="#A3A3A3"
                   />
                 </Styled.ViewIcon>
               </TouchableOpacity>
               <Styled.Value>{qtdProd}</Styled.Value>
               <TouchableOpacity onPress={handleMore}>
                 <Styled.ViewIcon>
-                  <Feather 
-                    name='plus'
+                  <Feather
+                    name="plus"
                     size={24}
-                    color={'#A3A3A3'}
+                    color="#A3A3A3"
                   />
                 </Styled.ViewIcon>
               </TouchableOpacity>
             </Styled.ViewIcones>
             <TouchableOpacity>
               <Styled.ViewHeart>
-                <Ionicons 
-                  name='heart-outline'
+                <Ionicons
+                  name="heart-outline"
                   size={20}
                 />
               </Styled.ViewHeart>

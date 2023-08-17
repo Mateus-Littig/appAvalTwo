@@ -2,11 +2,11 @@ import React from 'react';
 import { SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as Styled from './styles';
-import { HeaderButton } from '../../../components/HeaderButton'
-import { Title } from '../../../components/Title'
-import { ButtonUser } from '../../../components/ButtonUser'
+import { HeaderButton } from '../../../components/HeaderButton';
+import { Title } from '../../../components/Title';
+import { ButtonUser } from '../../../components/ButtonUser';
 import { Button } from '../../../components/Button';
+import * as Styled from './styles';
 
 export default function Profile() {
   const navigation = useNavigation();
@@ -26,7 +26,7 @@ export default function Profile() {
 
       <Styled.Container>
 
-        <HeaderButton 
+        <HeaderButton
           RightIcon
           iconNameR="search"
           iconSizeR={26}
@@ -42,23 +42,23 @@ export default function Profile() {
           </Styled.ViewUser>
         </Styled.ContentUser>
 
-        <ButtonUser 
+        <ButtonUser
           title="My orders"
           subTitle="Already have 12 orders"
         />
-        <ButtonUser 
+        <ButtonUser
           title="Shipping addresses"
           subTitle="3 ddresses"
         />
-        <ButtonUser 
+        <ButtonUser
           title="Payment methods"
           subTitle="Visa **34"
         />
-        <ButtonUser 
+        <ButtonUser
           title="Promocodes"
           subTitle="You have specias promocodes"
         />
-        <ButtonUser 
+        <ButtonUser
           title="My reviews"
           subTitle="Reviews for 4 items"
         />

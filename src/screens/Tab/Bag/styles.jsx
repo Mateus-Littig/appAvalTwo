@@ -122,3 +122,6 @@ export const Amount = styled.Text`
 export const Footer = styled.View`
   margin-top: 20px;
 `;
+export const ViewFooter = styled.View`
+  
+`;
