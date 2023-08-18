@@ -3,8 +3,9 @@ import styled from 'styled-components/native';
 export const TouchableContainer = styled.TouchableOpacity`
   width: 90%;
   height: 48px;
-  margin: auto;
   margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
   background-color: ${(props) => props.Bck};
   border: ${(props) => props.Border || 'transparent'};
   border-width: 2px;
@@ -13,7 +14,6 @@ export const TouchableContainer = styled.TouchableOpacity`
   border-radius: 50px;
   bottom: 15px;
 `;
-
 export const TouchableText = styled.Text`
   color:${(props) => props.Color || '#FFF'};
   font-size: 17px;

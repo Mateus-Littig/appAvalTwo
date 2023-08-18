@@ -28,13 +28,7 @@ export function CardAllProd() {
     const moreResponse = await api.get('/produtos/?populate=*&articles?pagination[page]=1&pagination[pageSize]=30');
     const moreProducts = moreResponse.data.data;
 
-    // Gere chaves únicas para os novos produtos
-    const newProducts = moreProducts.map((product, index) => ({
-      ...product,
-      id: `${product.id}_${index}`, // Crie uma chave única com base no ID do produto e no índice
-    }));
-
-    setProdutos((prevProducts) => [...prevProducts, ...newProducts]);
+    setProdutos((prevProducts) => [...prevProducts, ...moreProducts]);
     setProductsToShow((prevProductsToShow) => prevProductsToShow + productsPerLoad);
     setLoading(false);
   }
@@ -52,7 +46,7 @@ export function CardAllProd() {
         columnWrapperStyle={{ justifyContent: 'space-around' }}
         showsVerticalScrollIndicator={false}
         data={produtos.slice(0, productsToShow)}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item, index) => item.id + index.toString()}
         onEndReached={loadMoreProducts}
         onEndReachedThreshold={0.1} // quando chega no final da flatlist a função loadMore é chamada
           // atualiza o estado do loading e exibe o activityIndicator, buscando mais 10 produtos na API

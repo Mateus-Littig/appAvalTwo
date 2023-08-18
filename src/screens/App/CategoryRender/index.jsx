@@ -12,7 +12,6 @@ export function CategoryRender() {
   const navigation = useNavigation();
 
   const [categ, setCateg] = useState([]);
-  const [valid, setValid] = useState(true);
   const [produtos, setProdutos] = useState([]);
 
   function handleGoDetail(item) {
@@ -39,9 +38,6 @@ export function CategoryRender() {
     try {
       const response = await api.get(`/produtos/?populate=*&filters[categoria][name][$contains]=${categ?.attributes?.name}`);
       setProdutos(response.data.data);
-      if (response.data.data.length > 0) {
-        setValid(false);
-      }
     } catch (error) {
       console.log('Erro ao obter os produtos:', error);
     }
@@ -70,7 +66,8 @@ export function CategoryRender() {
             <Styled.TextCateg>{categ.attributes?.name}</Styled.TextCateg>
           </Styled.ViewCateg>
         </TouchableOpacity>
-        {valid ? (
+
+        {produtos.length === 0 ? (
           <Styled.Text>Não existe produtos para esta categoria!</Styled.Text>
         ) : (
           <FlatList

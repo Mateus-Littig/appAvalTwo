@@ -4,6 +4,23 @@ export const Container = styled.View`
   width: 100%;
   margin-top: 40px;
 `;
+export const ViewCartEmpty = styled.View`
+  width: 90%;
+  height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  gap: 15px;
+  top: 20px;
+`;
+export const Text = styled.Text`
+  font-size: 22px;
+  font-weight: bold;
+  color: ${({ theme }) => theme.COLORS.Black};
+`;
+export const Scroll = styled.ScrollView`
+  height: 600px;
+`;
 export const Card = styled.View`
   width: 90%;
   height: 104px;
@@ -121,7 +138,4 @@ export const Amount = styled.Text`
 `;
 export const Footer = styled.View`
   margin-top: 20px;
-`;
-export const ViewFooter = styled.View`
-  
 `;
