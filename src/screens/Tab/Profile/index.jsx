@@ -13,7 +13,7 @@ export default function Profile() {
 
   const handleLogout = async () => {
     try {
-      await AsyncStorage.removeItem('Token');
+      await AsyncStorage.removeItem('Token' && 'cartItems');
       console.log('Logout realizado com sucesso.');
       navigation.navigate('Login');
     } catch (error) {
